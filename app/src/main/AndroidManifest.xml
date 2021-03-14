@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLLite">
-        <activity android:name=".AddressAddActivity"
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:name=".AddressAddActivity"
             android:label="Add Address"
-            android:parentActivityName=".MainActivity"
-            ></activity>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

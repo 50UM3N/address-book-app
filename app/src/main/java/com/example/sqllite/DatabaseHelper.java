@@ -14,6 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "AddressBook.db";
     private   static  final int DATABASE_VERSION = 1;
 
+//    initialize table related variables
     private static final String TABLE_NAME = "address_library";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
@@ -28,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+//        creating database
         String query =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -40,10 +42,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        dropping database
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
         onCreate(db);
     }
 
+//    add new user
     void addNew(String name, String address, String email, String contact){
         SQLiteDatabase  db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -58,6 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Data Added Successfully!!!", Toast.LENGTH_SHORT).show();
         }
     }
+//    read all data
     Cursor readAllData(){
         String  query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();

@@ -45,6 +45,7 @@ public class CustomArrayAdapter extends RecyclerView.Adapter<CustomArrayAdapter.
         holder.adr_contact.setText(String.valueOf(contact.get(position)));
         holder.adr_address.setText(String.valueOf(address.get(position)));
 
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.sqllite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,20 +24,22 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> id,name,address, email,contact;
     CustomArrayAdapter customArrayAdapter;
     SwipeRefreshLayout swipe_refresh;
+    TextView defaultText;
     public static final int OPEN_NEW_ACTIVITY = 12345;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        remove dark theme
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recycleView = findViewById(R.id.recycle_view);
         add_button = findViewById(R.id.add_button);
         swipe_refresh = findViewById(R.id.swipe_refresh);
-
+        defaultText = findViewById(R.id.default_text);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, AddressAddActivity.class);
-//                intent.putExtras(storeDataInArray());
                 startActivityForResult(intent,OPEN_NEW_ACTIVITY);
             }
         });
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if (cursor.getCount()==0){
             Toast.makeText(getApplicationContext(),"No Data :-(", Toast.LENGTH_SHORT).show();
         }else{
+            defaultText.setVisibility(View.GONE);
             while (cursor.moveToNext()){
                 id.add(cursor.getString(0));
                 name.add(cursor.getString(1));
